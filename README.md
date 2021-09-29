@@ -1,2 +1,2 @@
 # testAssets
-demo files 
+itest demo files 
