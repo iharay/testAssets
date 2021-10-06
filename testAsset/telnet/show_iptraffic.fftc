@@ -6,6 +6,12 @@
     <procedures>
         <item name="main">
             <steps>
+                <item guid="237cfcfd-36f5-4fcb-9eaa-5123315955e0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>show test</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="c632569b-9a85-4796-b044-2212bb1ccc09" action="open" session="t1">
                     <command>
                         <body>telnet_10.100.50.14.ffsp</body>
