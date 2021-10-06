@@ -8,7 +8,7 @@
             <steps>
                 <item guid="237cfcfd-36f5-4fcb-9eaa-5123315955e0" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>show test</body>
+                        <body>show testcomment</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
