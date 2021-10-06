@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<testCase version="8.5.0.202104211757">
+    <execution>
+        <parameters version="8.5.0.202104211757">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <ipaddress>10.100.50.14</ipaddress>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="e492c77f-a342-44ce-97ec-dd94e3c96315" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>set target [param ipaddress]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="56538f68-62c5-4de1-8c09-7a06c20800a1" action="open" session="r1">
+                    <command>
+                        <body>telnet.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="7a4a6569-9b38-449a-8045-3a2a8689d15b" action="command" session="r1" normalOffset="2.05">
+                    <command isSecret="true">
+                        <body>toyo</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="78b1705f-72ff-4f2a-8cd4-9c0856beff05" action="command" session="r1" normalOffset="1.46" estimatedStepExecutionTime="0.002">
+                    <command>
+                        <body>en</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.215" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="24376b1f-8915-4609-8456-3e9e167e7f3f" action="command" session="r1" normalOffset="1.485">
+                    <command>
+                        <body>toyo</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="5d1cba23-d50e-4032-9068-33aa0e5b47dc" action="command" session="r1" normalOffset="3.126">
+                    <command>
+                        <body>term len 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.69" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="7871990b-e332-446c-a6df-0b6dc8aaec6b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>バージョン確認</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0e730495-74bb-4cf5-825a-9f4ab201c60a" action="command" session="r1" normalOffset="2.141" estimatedStepExecutionTime="2.124">
+                    <command>
+                        <body>show version</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^IOS \\(tm\\)\\s+\\d+\\s+Software \\(C\\d+-G\\d+IS-M\\), Version\\s+(([\\d]+(\\.[\\d]+)))\\(\\d+\\)XB,\\s+RELEASE SOFTWARE \\(fc\\d+\\)$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;12.3&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>{auto_message_true}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.604" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="33cff914-a14a-41f9-8deb-b87b7b7a1760" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>インターフェースup確認</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="428654a8-066c-4629-a6eb-b6b281b2051a" action="command" session="r1" normalOffset="5.156" estimatedStepExecutionTime="0.029">
+                    <command>
+                        <body>show interfaces</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^GigabitEthernet0/1+\\s+is up, line protocol is\\s+(\\w+)\\s+$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;up&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>{auto_message_true}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.217" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="b42e6bbb-3653-4b8f-89a8-0301f768304f" action="command" session="r1" normalOffset="4.885" estimatedStepExecutionTime="0.048">
+                    <command>
+                        <body>show run</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.1" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="ffa0a8a6-e1e9-4dcd-b181-83478dd2134a" action="command" session="r1" normalOffset="5.241">
+                    <command>
+                        <body>show ip route</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.657" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="99fd937e-f6fc-445e-81f2-a606c798e835" action="command" session="r1" normalOffset="5.548">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="0fb8b535-9510-4d5b-9119-10b6bf8a01d4" action="close" session="r1" normalOffset="0.114">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

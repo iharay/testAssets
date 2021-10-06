@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.5.0.202104211757">
+    <baseApplication>com.fnfr.svt.applications.cmd</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.cmd.CmdSessionProperties"/>
+    <responseLibrary inherit="false">project://my_project/</responseLibrary>
+    <formMapLibrary inherit="false">project://my_project/</formMapLibrary>
+    <nickName>cmd</nickName>
+</SessionTemplate>

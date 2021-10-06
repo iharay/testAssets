@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<testCase version="8.6.0.202108170724">
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="e2a5b416-18c2-413b-b2e0-57045ad12b95" action="open" session="cmd">
+                    <command>
+                        <body>cmd.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.cmd.CmdSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="4b16638d-6a76-4ffb-85cb-53c964f414c9" action="command" session="cmd" normalOffset="6.063">
+                    <command>
+                        <body>cd c:\\\\</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.143" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="7bb807e2-ff01-4993-8964-040b6684320f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>疎通確認</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ba480ad4-9c91-474a-b865-f95a04dd2b5e" action="command" session="cmd" normalOffset="7.173" estimatedStepExecutionTime="1.067">
+                    <command>
+                        <body>ping localhost -n 2</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^\\s+パケット数: 送信 =\\s+\\d+、受信 =\\s+\\d+、損失 =\\s+\\d+\\s+\\((\\d+)% の損失\\)、$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 0</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>{auto_message_true}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.001" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="3f7872d7-7808-49e0-bf36-b7b15180f34d" action="command" session="cmd" normalOffset="1.15">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="21d285af-e61e-4f0a-86d3-b41c44a733ea" action="close" session="cmd" normalOffset="0.012">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+    </procedures>
+</testCase>
