@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.6.0.202108170724">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">10.100.50.14</ipAddress>
+        <TerminalProperties>
+            <prompts merge="true">
+                <item name="password1" TypeOfPrompt="PASSWORD">
+                    <Content>Password:</Content>
+                </item>
+                <item name="normal1">
+                    <Content>NPE-G1#2&gt;</Content>
+                </item>
+                <item name="normal2">
+                    <Content>NPE-G1#2#</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://iTest_project/</responseLibrary>
+    <formMapLibrary inherit="false">project://iTest_project/</formMapLibrary>
+    <language>Python</language>
+</SessionTemplate>

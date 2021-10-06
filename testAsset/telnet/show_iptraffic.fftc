@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<testCase version="8.6.0.202108170724">
+    <general>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="c632569b-9a85-4796-b044-2212bb1ccc09" action="open" session="t1">
+                    <command>
+                        <body>telnet_10.100.50.14.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="a71dd507-d974-473a-a72c-c33b43e30382" action="command" session="t1" normalOffset="1.761" estimatedStepExecutionTime="0.001">
+                    <command isSecret="true">
+                        <body>toyo</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="afa63e93-6a69-486f-a632-1b74edebe544" action="command" session="t1" normalOffset="1.092">
+                    <command>
+                        <body>en</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.201" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="478cc5df-6654-40f4-939b-d51d7093cdb2" action="command" session="t1" normalOffset="0.793">
+                    <command>
+                        <body>toyo</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="f2c7d98f-33d8-405d-a0d8-6d7d6ecb473b" action="command" session="t1" normalOffset="3.657">
+                    <command>
+                        <body>term len 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.684" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="421263a5-ef08-4ef2-864b-bb920a3a8f55" action="command" session="t1" normalOffset="3.229" estimatedStepExecutionTime="0.03">
+                    <command>
+                        <body>show ip traffic</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.107" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="e6410b67-6d73-4123-b2bb-99abd104e773" action="command" session="t1" normalOffset="5.348" estimatedStepExecutionTime="0.025">
+                    <command>
+                        <body>show interfaces</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^GigabitEthernet0/1+\\s+is up, line protocol is\\s+(\\w+)\\s+$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>value == &quot;up&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>{auto_message_true}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.171" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="ae9635b7-d2ef-448b-a6bb-785e7ee48f6c" action="command" session="t1" normalOffset="4.4" estimatedStepExecutionTime="0.047">
+                    <command>
+                        <body>sh ip route</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.126" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="ca7dfb24-b3f0-4b19-aa6c-9755afc8c686" action="command" session="t1" normalOffset="2.919">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="adddd285-1506-429d-b893-e9d7a58c59ea" action="close" session="t1" normalOffset="0.114">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
